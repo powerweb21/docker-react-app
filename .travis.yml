@@ -1,0 +1,16 @@
+sudo: required
+
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - echo "start install"
+  - docker build -t powerweb21/docker-react-app -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true powerweb21/docker-react-app npm run test  -- --converage
+
+after_success:
+  - echo "Test Sucess"
